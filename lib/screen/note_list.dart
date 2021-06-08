@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_todo/controller/controller.dart';
+import 'package:getx_todo/widegt/grid_item.dart';
+import 'package:getx_todo/widegt/list_item.dart';
 
 import 'my_note.dart';
 
@@ -30,7 +32,7 @@ class _NoteListState extends State<NoteList> {
             ), onPressed: () {
              setState(() {
                showModel = !showModel;
-               print(showModel.toString());
+               // print(showModel.toString());
              });
             }),
             SizedBox(
@@ -39,6 +41,7 @@ class _NoteListState extends State<NoteList> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.redAccent,
           child: Icon(Icons.add),
           onPressed: () {
             Get.to(MyNote());
@@ -59,114 +62,10 @@ class _NoteListState extends State<NoteList> {
                 ),
               )
             : showModel
-            ?  ListView.builder(
-          itemCount: noteController.notes.length,
-          itemBuilder: (context, index) => Card(
-            color: noteController.notes[index].color,
-            margin: EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 10.0
-            ),
-            child: ListTile(
-              title: Text(noteController.notes[index].title,style: TextStyle(),),
-              leading: CircleAvatar(
-                backgroundColor: Colors.black38,
-                child: Text(
-                  '#${index+1}',
-                  style: TextStyle(
-                      fontSize: 18,
-                    color: Colors.white
-                  ),
-                ),
-              ),
-              trailing: Wrap(
-                children: [
-                  IconButton(icon: Icon(Icons.edit), onPressed: (){
-                    Get.to(MyNote(index: index,));
-                  }),
-                  IconButton(icon: Icon(Icons.delete,color: Colors.red,), onPressed: (){
-                    Get.defaultDialog(
-                      cancelTextColor: Colors.green,
-                      confirmTextColor: Colors.red,
-                      buttonColor: Colors.transparent,
-                      title: 'Delete Note',
-                      middleText: noteController.notes[index].title,
-                      onCancel: ()=>Get.back(),
-                      onConfirm: (){
-                        noteController.notes.removeAt(index);
-                        Get.back();
-                      },
-                    );
-                  }),
-                ],
-              ),
-            ),
-          ),
-        )
-            :GridView.builder(
-          padding: EdgeInsets.all(5.0),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 5.0,
-              mainAxisSpacing: 5.0),
-          itemCount: noteController.notes.length,
-          itemBuilder: (context, index) => Card(
-              color: noteController.notes[index].color,
-              margin:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.black38,
-                      child: Text(
-                        '#${index + 1}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Flexible(
-                        child: Text(noteController.notes[index].title)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.black38,
-                            ),
-                            onPressed: () {
-                              Get.to(MyNote(
-                                index: index,
-                              ));
-                            }),
-                        IconButton(
-                            icon: Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              Get.defaultDialog(
-                                cancelTextColor: Colors.green,
-                                confirmTextColor: Colors.red,
-                                buttonColor: Colors.transparent,
-                                title: 'Delete Note',
-                                middleText:
-                                noteController.notes[index].title,
-                                onCancel: () => Get.back(),
-                                onConfirm: () {
-                                  noteController.notes.removeAt(index);
-                                  Get.back();
-                                },
-                              );
-                            })
-                      ],
-                    )
-                  ],
-                ),
-              )),
-        )
+            ? ListItem(noteController: noteController)
+            : GridItem(noteController: noteController)
         ));
   }
 }
+
+

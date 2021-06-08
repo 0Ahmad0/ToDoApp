@@ -21,16 +21,16 @@ class MyNote extends StatelessWidget {
     TextEditingController textEditingController =
         new TextEditingController(text: text);
     List<Color> colors = [
-      Colors.red[200],
-      Colors.purple[200],
-      Colors.pink[200],
-      Colors.green[200],
-      Colors.blue[200],
-      Colors.yellow[200],
-      Colors.deepOrange[200],
-      Colors.teal[200],
-      Colors.indigo[200],
-      Colors.cyan[200],
+      Colors.red[100],
+      Colors.purple[100],
+      Colors.pink[100],
+      Colors.green[100],
+      Colors.blue[100],
+      Colors.yellow[100],
+      Colors.deepOrange[100],
+      Colors.teal[100],
+      Colors.indigo[100],
+      Colors.cyan[100],
     ];
     return Scaffold(
       appBar: AppBar(
@@ -55,6 +55,7 @@ class MyNote extends StatelessWidget {
             ),
             style: TextStyle(fontSize: 20),
             keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
             maxLines: 5,
           ),
           SizedBox(height: 20.0,),
