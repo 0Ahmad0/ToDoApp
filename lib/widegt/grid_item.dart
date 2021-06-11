@@ -19,8 +19,8 @@ class GridItem extends StatelessWidget {
           crossAxisCount: 2, crossAxisSpacing: 5.0, mainAxisSpacing: 5.0),
       itemCount: noteController.notes.length,
       itemBuilder: (context, index) => Card(
-          color: noteController.notes[index].color,
-          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          color: Color(noteController.notes[index].color),
+          margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -33,9 +33,8 @@ class GridItem extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                      child: SingleChildScrollView(scrollDirection: Axis.vertical,child: Text(noteController.notes[index].title))),
+                Flexible(
+                  child: Text(noteController.notes[index].title),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,6 +56,7 @@ class GridItem extends StatelessWidget {
                         ),
                         onPressed: () {
                           Get.defaultDialog(
+                            radius: 10.0,
                             cancelTextColor: Colors.green,
                             confirmTextColor: Colors.red,
                             buttonColor: Colors.transparent,

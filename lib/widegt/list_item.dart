@@ -14,10 +14,11 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
       itemCount: noteController.notes.length,
       itemBuilder: (context, index) => Card(
-        color: noteController.notes[index].color,
-        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        color: Color(noteController.notes[index].color),
+        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         child: ListTile(
           title: Text(
             noteController.notes[index].title,
@@ -46,6 +47,7 @@ class ListItem extends StatelessWidget {
                   ),
                   onPressed: () {
                     Get.defaultDialog(
+                      radius: 10.0,
                       cancelTextColor: Colors.green,
                       confirmTextColor: Colors.red,
                       buttonColor: Colors.transparent,

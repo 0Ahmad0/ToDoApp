@@ -19,26 +19,26 @@ class MyNote extends StatelessWidget {
     String text = '';
     text = index == null ? '' : noteController.notes[index].title;
     TextEditingController textEditingController =
-        new TextEditingController(text: text);
-    List<Color> colors = [
-      Colors.red[100],
-      Colors.purple[100],
-      Colors.pink[100],
-      Colors.green[100],
-      Colors.blue[100],
-      Colors.yellow[100],
-      Colors.deepOrange[100],
-      Colors.teal[100],
-      Colors.indigo[100],
-      Colors.cyan[100],
+    new TextEditingController(text: text);
+    List<int> colors = [
+      0xffffcdd2,
+      0xffe1bee7,
+      0xfff8bbd0,
+      0xffc8e6c9,
+      0xffbbdefb,
+      0xfffff9c4,
+      0xffffccbc,
+      0xffb2dfdb,
+      0xffc5cae9,
+      0xffb2ebf2,
     ];
     return Scaffold(
       appBar: AppBar(
           title: index == null ? Text('Create New Note') : Text('Update Note')),
       body: ListView(
         padding: EdgeInsets.symmetric(
-          horizontal: 20.0,
-          vertical: 40.0
+            horizontal: 20.0,
+            vertical: 40.0
         ),
         children: [
           TextField(
@@ -71,20 +71,26 @@ class MyNote extends StatelessWidget {
               ),
               CreateButton(
                 onPressed: () {
-                  if(textEditingController.text.isEmpty){
+                  if (textEditingController.text.isEmpty) {
                     Get.snackbar(
-                        'Please Write Something',
-                        'error happen',
+                      'Please Write Something',
+                      'error happen',
                       snackPosition: SnackPosition.BOTTOM,
                       colorText: Colors.black,
                       backgroundColor: Colors.red[200],
+                      duration: Duration(seconds: 1),
                     );
                   }
-                  if(index == null&&(!textEditingController.text.isEmpty)){
+                  if (index == null && (!textEditingController.text.isEmpty)) {
                     noteController.notes.add(
-                        Note(title: textEditingController.text,color: colors[Random().nextInt(colors.length)]),
+                      Note(
+                        title: textEditingController.text,
+                        color: colors[Random().nextInt(colors.length)],
+                      )
                     );
-                  } else {
+
+                  }
+                  else {
                     var update = noteController.notes[index];
                     update.title = textEditingController.text;
                     noteController.notes[index] = update;
