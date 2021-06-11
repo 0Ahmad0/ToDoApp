@@ -7,7 +7,7 @@ class DeleteAllController extends GetxController{
     list.isEmpty? null:Get.defaultDialog(
         radius: 10.0,
         title: 'Delete ${list.length} Notes?',
-        middleText: '💔😪💔 ',
+        middleText: '💔😪💔',
         buttonColor: Colors.transparent,
         cancelTextColor: Colors.green,
         confirmTextColor: Colors.red,
